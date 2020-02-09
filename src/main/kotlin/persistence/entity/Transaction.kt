@@ -7,7 +7,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name="transactions")
-data class Transaction(@Id val id: Long,
+data class Transaction(@Id val transaction_id: Long,
                        @JoinColumn(name="id")
                        val accountTo: Account,
                        @JoinColumn(name="id")
