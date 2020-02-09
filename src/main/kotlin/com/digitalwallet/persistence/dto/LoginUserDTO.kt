@@ -1,4 +1,4 @@
 package com.digitalwallet.persistence.dto
 
-data class LoginUserDTO(val username: String, val password: String) {
+data class LoginUserDTO(val email: String, val password: String) {
 }

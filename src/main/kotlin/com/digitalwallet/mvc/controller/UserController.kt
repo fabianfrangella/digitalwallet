@@ -1,5 +1,6 @@
 package com.digitalwallet.mvc.controller
 
+import com.digitalwallet.persistence.dto.LoginUserDTO
 import com.digitalwallet.persistence.dto.UserRegisterDTO
 import com.digitalwallet.service.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,4 +23,11 @@ class UserController {
     @ResponseStatus (HttpStatus.CREATED)
     @ResponseBody
     fun register(@RequestBody userRegister: UserRegisterDTO) = userService.register(userRegister);
+
+    @PostMapping(path = ["/login"],
+            consumes = [MediaType.APPLICATION_JSON_VALUE],
+            produces = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus (HttpStatus.ACCEPTED)
+    @ResponseBody
+    fun login(@RequestBody userLogin: LoginUserDTO) = userService.login(userLogin);
 }

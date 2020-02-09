@@ -9,6 +9,6 @@ import com.digitalwallet.persistence.entity.User
 @Repository
 interface UserRepository : JpaRepository<User, Long> {
 
-    @Query("SELECT u.username FROM User u where u.username = :username AND u.password = :password")
-    fun validateUser(@Param("username") username: String, @Param("password") password: String): String
+    @Query("SELECT u.username FROM User u where u.email = :email AND u.password = :password")
+    fun validateUser(@Param("email") username: String, @Param("password") password: String): String
 }

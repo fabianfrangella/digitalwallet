@@ -14,8 +14,13 @@ class UserService {
     @Autowired
     private lateinit var userRepository: UserRepository;
 
-    fun login(loginUser: LoginUserDTO)
-            = !userRepository.validateUser(loginUser.username,loginUser.password).isNullOrEmpty()
+    fun login(loginUser: LoginUserDTO) : String{
+            if (!userRepository.validateUser(loginUser.email,loginUser.password).isNullOrEmpty()) {
+                return "login successful"
+            } else {
+                return "Email or Password is wrong"
+            }
+    }
 
     fun register(userDTO: UserRegisterDTO) : User{
         var user = buildUser(userDTO)
