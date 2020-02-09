@@ -1,24 +1,25 @@
 package com.digitalwallet.mvc.controller
 
-import com.digitalwallet.persistence.dto.UserDTO
 import com.digitalwallet.persistence.dto.UserRegisterDTO
 import com.digitalwallet.service.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 
 
 @Controller
+@RequestMapping("/")
 class UserController {
+
     @Autowired
     private lateinit var userService: UserService;
 
-    @PostMapping("/register", consumes = ["application/json"], produces = ["application/json"])
+    @PostMapping(path = ["/register"],
+            consumes = [MediaType.APPLICATION_JSON_VALUE],
+            produces = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus (HttpStatus.CREATED)
     @ResponseBody
-    fun register(@RequestBody user: UserRegisterDTO) : UserRegisterDTO {
-        userService.register(user)
-        return user;
-    }
+    fun register(@RequestBody userRegister: UserRegisterDTO) = userService.register(userRegister);
 }

@@ -17,9 +17,10 @@ class UserService {
     fun login(loginUser: LoginUserDTO)
             = !userRepository.validateUser(loginUser.username,loginUser.password).isNullOrEmpty()
 
-    fun register(userDTO: UserRegisterDTO) {
+    fun register(userDTO: UserRegisterDTO) : User{
         var user = buildUser(userDTO)
         userRepository.save(user)
+        return user
     }
 
     /**
