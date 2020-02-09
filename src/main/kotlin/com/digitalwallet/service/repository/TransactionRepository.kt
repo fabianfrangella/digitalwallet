@@ -1,8 +1,8 @@
-package service.repository
+package com.digitalwallet.service.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
-import persistence.entity.Transaction
+import com.digitalwallet.persistence.entity.Transaction
 
 @Repository
 interface TransactionRepository: JpaRepository<Transaction, Long> {

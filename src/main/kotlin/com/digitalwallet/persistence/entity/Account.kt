@@ -1,4 +1,4 @@
-package persistence.entity
+package com.digitalwallet.persistence.entity
 
 import javax.persistence.*
 
