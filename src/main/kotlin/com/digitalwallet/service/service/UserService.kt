@@ -2,7 +2,6 @@ package com.digitalwallet.service.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import com.digitalwallet.persistence.dto.LoginUserDTO
-import com.digitalwallet.persistence.dto.UserDTO
 import com.digitalwallet.persistence.dto.UserRegisterDTO
 import com.digitalwallet.persistence.entity.User
 import com.digitalwallet.service.repository.UserRepository
@@ -15,11 +14,11 @@ class UserService {
     private lateinit var userRepository: UserRepository;
 
     fun login(loginUser: LoginUserDTO) : String{
-            if (!userRepository.validateUser(loginUser.email,loginUser.password).isNullOrEmpty()) {
-                return "login successful"
-            } else {
-                return "Email or Password is wrong"
-            }
+        return if (!userRepository.validateUser(loginUser.email,loginUser.password).isNullOrEmpty()) {
+            "login successful"
+        } else {
+            "Email or Password is wrong"
+        }
     }
 
     fun register(userDTO: UserRegisterDTO) : User{
