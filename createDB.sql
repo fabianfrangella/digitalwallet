@@ -1,4 +1,4 @@
-CREATE TABLE users(
+CREATE TABLE app_user(
     user_id serial,
     username varchar(50) UNIQUE,
     email varchar(50) UNIQUE,
@@ -8,7 +8,7 @@ CREATE TABLE users(
     CONSTRAINT user_pk PRIMARY KEY (user_id)
     );
 
-CREATE TABLE accounts(
+CREATE TABLE account(
 	account_id serial,
 	balance int,
 	user_id int,
@@ -17,7 +17,7 @@ CREATE TABLE accounts(
     CONSTRAINT user_fk FOREIGN KEY(user_id) REFERENCES users (user_id)
     );
 
-CREATE TABLE transactions(
+CREATE TABLE transaction(
         transaction_id serial,
         account_to int,
         account_from int,
