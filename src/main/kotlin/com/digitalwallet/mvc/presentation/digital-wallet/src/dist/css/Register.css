@@ -4,7 +4,11 @@
       padding: 45px 0;
       background-color: #282c34;
       color: white;
-      width: auto;    
+      position:fixed;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;  
     }
   
     .Register form {

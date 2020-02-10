@@ -6,7 +6,7 @@ class Footer extends Component{
 
             <footer className="footer mt-auto py-3">
                 <div className="container">
-                 <span className="text-muted">Digital Wallet 2019</span>
+                 <span className="text-muted">Digital Wallet 2020</span>
                 </div>
             </footer>
 

@@ -132,7 +132,7 @@ class Login extends Component {
                         Register
                     </Button>
                 </Form>
-                <div className="App">
+                <div>
                     <Footer />
                 </div>
             </div>

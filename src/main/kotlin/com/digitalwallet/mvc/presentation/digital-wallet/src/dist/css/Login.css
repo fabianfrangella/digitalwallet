@@ -1,9 +1,15 @@
-@media all and (min-width: 480px) {
+@media all and (min-width: 460px) {  
   .Login {
-    padding: 160px 0;
+    padding: 120px 0;
     text-align: center;
     background-color: #282c34;
     color: white;
+    height: 90vh;
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
   }
 
   .Login form {
@@ -13,8 +19,7 @@
 
   .Login-logo {
     height: 10vmin;
-  }
-  
+  } 
 }
 
 

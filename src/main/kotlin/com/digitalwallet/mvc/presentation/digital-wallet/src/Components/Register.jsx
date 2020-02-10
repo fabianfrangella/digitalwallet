@@ -151,7 +151,7 @@ export default class Register extends Component {
                                     value={this.state.password}
                                     onChange={event => this.handleChange(event.target.value, 'password')}
                                     type="password"
-                                    placeholder="*********"
+                                    placeholder="Enter your password"
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     This is a required field.
