@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import './dist/css/App.css';
 import Login from './Components/Login';
+import Register from './Components/Register';
 import NotFound from './Components/NotFound';
 
 /**
@@ -15,6 +16,7 @@ class App extends Component {
     <BrowserRouter>
       <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route path="*" component={NotFound} />
       </Switch>
   </BrowserRouter>

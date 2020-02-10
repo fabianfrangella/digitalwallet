@@ -27,7 +27,6 @@ class Login extends Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     /**
@@ -58,21 +57,6 @@ class Login extends Component {
     handleRegister() {
         this.props.history.push('/register');
     }
-
-    /**
-     * function used to validate the login form and send the login request to the API
-     * @param {Event} event 
-     */
-    handleSubmit(event) {
-        this.handleLogin(event)
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        this.setState({ validated: true });
-
-    };
 
     /**
      * render the login page
@@ -108,7 +92,8 @@ class Login extends Component {
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a> </a>
-                    <button class="btn btn-secondary">Register</button>
+                    <button class="btn btn-secondary" 
+                            onClick={(ev) => this.handleRegister(ev)}>Register</button>
                     </form>
                 <div className="App">
                     <Footer />
