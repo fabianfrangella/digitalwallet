@@ -5,6 +5,7 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import NotFound from './Components/NotFound';
 import Logout from './Components/Logout';
+import Account from './Components/Account';
 
 /**
  * @author Fabian Frangella
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/logout" component={Logout}/>
+          <Route exact path="/home" component={Account}/>
           <Route path="*" component={NotFound} />
       </Switch>
   </BrowserRouter>

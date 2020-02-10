@@ -40,7 +40,7 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password,
         }).then((response) => {
-            console.log("login successful")
+            this.props.history.push('/home')
         }).catch((error) => {
             if (this.state.email !== '' && this.state.password !== '') {
                 this.setState({
