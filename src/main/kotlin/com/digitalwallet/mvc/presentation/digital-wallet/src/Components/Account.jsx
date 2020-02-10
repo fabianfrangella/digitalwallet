@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 import Footer from './Footer'
 import Navigation from './Navigation'
+import Axios from 'axios';
 
 
 export default class Account extends Component {
@@ -14,6 +14,19 @@ export default class Account extends Component {
             cvu: "",
             balance: ""
         }
+    }
+
+    componentDidMount() {
+        Axios.get(`http://localhost:8080/account/24`)
+        .then((response) => {
+            this.setState({
+                username: response.data.username,
+                email: response.data.email,
+                idCard: response.data.idCard,
+                cvu: response.data.cvu,
+                balance: response.data.balance
+            })
+        })
     }
 
     render() {
@@ -83,14 +96,12 @@ export default class Account extends Component {
                             <button type="submit"
                                     className="btn btn-primary">Change
                                     <i className="far fa-paper-plane"></i>
-                                    </button>
-      
+                            </button>
                         <br/>
                     </div>
+                    <Footer/>
                 </header>
             </div>
         )
     }
-
-
 }
