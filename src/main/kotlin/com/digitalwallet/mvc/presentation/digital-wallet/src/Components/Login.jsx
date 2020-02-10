@@ -27,6 +27,7 @@ class Login extends Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     /**
@@ -40,6 +41,16 @@ class Login extends Component {
             password: this.state.password,
         }).then((response) => {
             console.log("login successful")
+        }).catch((error) => {
+            if (this.state.email !== '' && this.state.password !== '') {
+                this.setState({
+                    alert: {
+                        show: true,
+                        variant: "danger",
+                        message: error.response.data.message
+                    }
+                })
+            }
         })
     }
 
@@ -58,6 +69,21 @@ class Login extends Component {
         this.props.history.push('/register');
     }
 
+        /**
+     * function used to validate the login form and send the login request to the API
+     * @param {Event} event 
+     */
+    handleSubmit(event) {
+        this.handleLogin(event)
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        this.setState({ validated: true });
+
+    }
+
     /**
      * render the login page
      */
@@ -67,34 +93,45 @@ class Login extends Component {
                 <div className="row justify-content-center">
                     <img className="Login-logo" src={logo} alt="DigitalWallet Logo"></img>
                 </div>
-                    <form onSubmit={this.handleLogin}>
-                    <div className="form-group">
-                        <label>Email address</label>
-                        <input type="email" 
-                                class="form-control"  
-                                aria-describedby="emailHelp"
-                                required
-                                autoFocus
-                                value={this.state.email}
-                                onChange={event => this.handleChange(event.target.value, 'email')}
-                                placeholder="Enter email"></input>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                     </div>
-                     <div className="form-group">
-                        <label>Password</label>
-                        <input required
-                            class="form-control"
+                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            required
+                            autoFocus
+                            type="email"
+                            placeholder="Enter your E-Mail"
+                            value={this.state.email}
+                            onChange={event => this.handleChange(event.target.value, 'email')}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            This is a required field.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="password">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            required
                             type="password"
                             value={this.state.password}
                             onChange={event => this.handleChange(event.target.value, 'password')}
-                            placeholder="Enter your password">
-                            </input>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a> </a>
-                    <button class="btn btn-secondary" 
-                            onClick={(ev) => this.handleRegister(ev)}>Register</button>
-                    </form>
+                            placeholder="Enter your password"
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            This is a required field.
+                        </Form.Control.Feedback>
+                        <br></br>
+                        <Alert variant={this.state.alert.variant} show={this.state.alert.show}>
+                            {this.state.alert.message}
+                        </Alert>
+                    </Form.Group>
+                    <Button block="large" type="submit">
+                        Login
+                    </Button>
+                    <Button variant="secondary" block="large" onClick={(ev) => this.handleRegister(ev)}>
+                        Register
+                    </Button>
+                </Form>
                 <div className="App">
                     <Footer />
                 </div>
