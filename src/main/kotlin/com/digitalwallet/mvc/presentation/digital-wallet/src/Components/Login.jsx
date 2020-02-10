@@ -83,8 +83,8 @@ class Login extends Component {
                 <div className="row justify-content-center">
                     <img className="Login-logo" src={logo} alt="DigitalWallet Logo"></img>
                 </div>
-                    <form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
-                    <div class="form-group">
+                    <form onSubmit={this.handleLogin}>
+                    <div className="form-group">
                         <label>Email address</label>
                         <input type="email" 
                                 class="form-control"  
@@ -96,7 +96,7 @@ class Login extends Component {
                                 placeholder="Enter email"></input>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                      </div>
-                     <div class="form-group">
+                     <div className="form-group">
                         <label>Password</label>
                         <input required
                             class="form-control"
