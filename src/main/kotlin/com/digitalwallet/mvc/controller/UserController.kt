@@ -1,6 +1,7 @@
 package com.digitalwallet.mvc.controller
 
 import com.digitalwallet.persistence.dto.LoginUserDTO
+import com.digitalwallet.persistence.dto.UserDataDTO
 import com.digitalwallet.persistence.dto.UserRegisterDTO
 import com.digitalwallet.service.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -31,4 +32,10 @@ class UserController {
     @ResponseStatus (HttpStatus.ACCEPTED)
     @ResponseBody
     fun login(@RequestBody userLogin: LoginUserDTO) = userService.login(userLogin);
+
+    @GetMapping(path= ["/account/{userId}"])
+    @ResponseBody
+    fun getUserAccount(@PathVariable userId: String): UserDataDTO {
+       return userService.getUserData(userId.toLong())
+    }
 }

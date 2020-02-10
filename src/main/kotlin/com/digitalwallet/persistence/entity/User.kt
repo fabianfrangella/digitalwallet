@@ -8,7 +8,7 @@ import javax.persistence.Table
 @Entity
 @Table(name="app_user")
 class User(
-        @Id @GeneratedValue val user_id: Long? = null,
+        @Id @GeneratedValue var user_id: Long? = null,
         var username: String? = null,
         var email: String? = null,
         var cvu: Long? = null,
