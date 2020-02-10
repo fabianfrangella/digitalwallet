@@ -36,25 +36,11 @@ class Login extends Component {
      */
     handleLogin = (ev) => {
         ev.preventDefault();
-        axios.post(`http://localhost:7000/login`, {
+        axios.post(`http://localhost:8080/login`, {
             email: this.state.email,
             password: this.state.password,
         }).then((response) => {
-            axios.get(`http://localhost:7000/users/user-id/${this.state.email}`)
-                .then((response) => {
-                    localStorage.setItem("user", response.data.idCard)
-                    this.props.history.push('/account', { idCard: response.data.idCard })
-                })
-        }).catch((error) => {
-            if (this.state.email !== '' && this.state.password !== '') {
-                this.setState({
-                    alert: {
-                        show: true,
-                        variant: "danger",
-                        message: error.response.data.message
-                    }
-                })
-            }
+            console.log("login successful")
         })
     }
 
@@ -95,47 +81,35 @@ class Login extends Component {
         return (
             <div className="Login">
                 <div className="row justify-content-center">
-                    <img className="logo" src={logo} alt="DigitalWallet Logo"></img>
+                    <img className="Login-logo" src={logo} alt="DigitalWallet Logo"></img>
                 </div>
-                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="email">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            required
-                            autoFocus
-                            type="email"
-                            placeholder="Enter your E-Mail"
-                            value={this.state.email}
-                            onChange={event => this.handleChange(event.target.value, 'email')}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            This is a required field.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            required
+                    <form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" 
+                                class="form-control"  
+                                aria-describedby="emailHelp"
+                                required
+                                autoFocus
+                                value={this.state.email}
+                                onChange={event => this.handleChange(event.target.value, 'email')}
+                                placeholder="Enter email"></input>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                     </div>
+                     <div class="form-group">
+                        <label>Password</label>
+                        <input required
+                            class="form-control"
                             type="password"
                             value={this.state.password}
                             onChange={event => this.handleChange(event.target.value, 'password')}
-                            placeholder="Enter your password"
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            This is a required field.
-                        </Form.Control.Feedback>
-                        <br></br>
-                        <Alert variant={this.state.alert.variant} show={this.state.alert.show}>
-                            {this.state.alert.message}
-                        </Alert>
-                    </Form.Group>
-                    <Button block="large" type="submit">
-                        Login
-                    </Button>
-                    <Button variant="secondary" block="large" onClick={(ev) => this.handleRegister(ev)}>
-                        Register
-                    </Button>
-                </Form>
+                            placeholder="Enter your password">
+                            </input>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a> </a>
+                    <button class="btn btn-secondary">Register</button>
+                    </form>
                 <div className="App">
                     <Footer />
                 </div>
@@ -145,4 +119,3 @@ class Login extends Component {
 }
 
 export default withRouter(Login)
-

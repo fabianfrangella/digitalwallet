@@ -1,6 +1,7 @@
 @media all and (min-width: 480px) {
   .Login {
     padding: 160px 0;
+    text-align: center;
     background-color: #282c34;
     color: white;
   }
@@ -12,7 +13,6 @@
 
   .Login-logo {
     height: 10vmin;
-    margin-left: 352px;
   }
   
 }
