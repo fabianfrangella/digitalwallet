@@ -4,6 +4,7 @@ import './dist/css/App.css';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import NotFound from './Components/NotFound';
+import Logout from './Components/Logout';
 
 /**
  * @author Fabian Frangella
@@ -17,6 +18,7 @@ class App extends Component {
       <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/logout" component={Logout}/>
           <Route path="*" component={NotFound} />
       </Switch>
   </BrowserRouter>
