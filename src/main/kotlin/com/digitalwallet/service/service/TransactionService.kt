@@ -18,7 +18,5 @@ class TransactionService {
 		transaction.accountTo = transactionDTO.accountTo
 		transaction.amount = transactionDTO.amount
 		transactionRepository.save(transaction)
-		
-		
 	}
 }
