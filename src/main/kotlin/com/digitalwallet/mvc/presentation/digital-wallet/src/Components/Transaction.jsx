@@ -10,6 +10,7 @@ export default class Transaction extends Component {
         this.state = {
             transactions: [],
             records: false,
+            account: ''
         };
 
     }
@@ -18,8 +19,8 @@ export default class Transaction extends Component {
         return this.state.transactions.map(e => <tr>
             <td>{e.date.substring(0, 10)}</td>
             <td>{e.date.substring(11, 19)}</td>
-            <td className={`${e.accountFrom == 4 ? 'text-danger' : 'text-success'}`}>
-                {e.accountFrom == 4 ? "Cash Out" : "Cash In"}</td>
+            <td className={`${e.accountFrom == this.state.account ? 'text-danger' : 'text-success'}`}>
+                {e.accountFrom == this.state.account ? "Cash Out" : "Cash In"}</td>
             <td> {Math.abs(e.amount)} </td>
         </tr>)
     }
@@ -28,6 +29,7 @@ export default class Transaction extends Component {
 
         Axios.get(`http://localhost:8080/account?userId=${this.props.location.state.userId}`)
             .then(response => {
+                this.setState({account: response.data})
                 Axios.get(`http://localhost:8080/transaction/transaction-list?accountId=${response.data}`)
                     .then(response => {
                         this.setState({

@@ -12,10 +12,8 @@ class AccountService {
 	private lateinit var accountRepository: AccountRepository
 	
 	fun updateBalance(transactionDTO: TransactionDTO){
-		transactionDTO.accountTo?.let { transactionDTO.amount?.let {
-			it1 -> accountRepository.updateBalance(it, it1) } }
+		accountRepository.updateBalance(transactionDTO.accountTo,transactionDTO.amount)
 
-		transactionDTO.accountFrom?.let { transactionDTO.amount?.times(-1)?.let {
-			it1 -> accountRepository.updateBalance(it, it1) } }
+		accountRepository.updateBalance(transactionDTO.accountFrom, transactionDTO.amount?.times(-1))
 	} 
 }

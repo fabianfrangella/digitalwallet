@@ -8,7 +8,6 @@ export default class Transfer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            accountFrom: '',
             accountTo: '',
             amount: '',
             setShowModal: false,
@@ -52,31 +51,31 @@ export default class Transfer extends Component {
         event.preventDefault()
         Axios.get(`http://localhost:8080/account?userId=${this.props.location.state.userId}`)
             .then(response => {
-                this.setState({accountFrom: response.data})
+                Axios.post(`http://localhost:8080/transaction/transfer`, {
+                    accountFrom: response.data,
+                    accountTo: this.state.accountTo,
+                    amount: this.state.amount
+                }).then((response) => {
+                    this.setState({
+                        setShowModal: false,
+                        alert: {
+                            show: true,
+                            variant: "success",
+                            message: "Transaction Successful",
+                        }
+                    })
+                }).catch((error) => {
+                    this.setState({
+                        setShowModal: false,
+                        alert: {
+                            show: true,
+                            variant: "danger",
+                            message: "Error during transaction, please try again"
+                        }
+                    })
+                })
             })
-        Axios.post(`http://localhost:8080/transaction/transfer`, {
-            accountFrom: this.state.accountFrom,
-            accountTo: this.state.accountTo,
-            amount: this.state.amount
-        }).then((response) => {
-            this.setState({
-                setShowModal: false,
-                alert: {
-                    show: true,
-                    variant: "success",
-                    message: "Transaction Successful",
-                }
-            })
-        }).catch((error) => {
-            this.setState({
-                setShowModal: false,
-                alert: {
-                    show: true,
-                    variant: "danger",
-                    message: "Error during transaction, please try again"
-                }
-            })
-        })
+
     }
 
     render() {

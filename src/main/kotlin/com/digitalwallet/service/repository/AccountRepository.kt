@@ -15,7 +15,7 @@ interface AccountRepository : JpaRepository<Account, Long>{
 
     @Modifying
 	@Query ("UPDATE Account a SET a.balance = a.balance + :amount WHERE a.account_id = :account")
-	fun updateBalance(@Param ("account") account: Long, @Param ("amount") amount: Long)
+	fun updateBalance(@Param ("account") account: Long?, @Param ("amount") amount: Long?)
 
     @Query("SELECT a.account_id FROM Account a WHERE a.user_id = :user_id")
     fun getUserAccountId(@Param("user_id") user_id: Long): Long
