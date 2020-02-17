@@ -11,9 +11,6 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 import javax.transaction.Transactional
 
-
-
-
 @Controller
 @CrossOrigin(origins= ["http://localhost:3000"])
 @RequestMapping("/transaction")

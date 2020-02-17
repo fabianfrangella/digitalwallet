@@ -8,7 +8,7 @@ import {isLogin} from "../Utils";
  */
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
-        isLogin()
+        isLogin(props)
             ? <Component {...props} />
             : <Redirect to={{ pathname: '/', state: { from: props.location } }} />
     )} />

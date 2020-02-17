@@ -11,7 +11,7 @@ class Navigation extends Component {
     return (
       <Navbar bg="dark" expand="lg" variant="dark">
         <Navbar.Brand>          
-        <Link to="">
+        <Link to={{pathname: 'home', state: {userId: this.props.id}}}>
           <Image className="logo" src={logo} fluid ></Image>
           </Link>
           </Navbar.Brand>
