@@ -7,6 +7,7 @@ import NotFound from './Components/NotFound';
 import Logout from './Components/Logout';
 import Account from './Components/Account';
 import Transfer from './Components/Transfer';
+import Transaction from './Components/Transaction';
 
 /**
  * @author Fabian Frangella
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path="/logout" component={Logout}/>
           <Route exact path="/home" component={Account}/>
           <Route exact path="/transfer" component={Transfer}/>
+          <Route exact path="/transactions" component={Transaction}/>
           <Route path="*" component={NotFound} />
       </Switch>
   </BrowserRouter>

@@ -22,7 +22,7 @@ class Navigation extends Component {
               <Link className="link" to="/home">Account</Link>
             </Navbar.Brand>
             <Navbar.Brand>
-              <Link className="link" to="">Transactions</Link>
+              <Link className="link" to="/transactions">Transactions</Link>
             </Navbar.Brand>
             <Navbar.Brand>
               <Link className="link" to="">Cash In</Link>
