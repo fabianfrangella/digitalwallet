@@ -6,6 +6,7 @@ import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.TransactionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class TransactionService {
@@ -22,5 +23,9 @@ class TransactionService {
 		transaction.amount = transactionDTO.amount
 		transaction.date = transactionDTO.date
 		transactionRepository.save(transaction)
+	}
+
+	fun getTransactions(accountId: Long): List<Transaction> {
+		return transactionRepository.findTransactions(accountId)
 	}
 }

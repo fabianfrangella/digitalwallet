@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param
 @Repository
 interface AccountRepository : JpaRepository<Account, Long>{
 
-    @Query("SELECT balance FROM Account a WHERE a.user_id = :user_id")
+    @Query("SELECT a.balance FROM Account a WHERE a.user_id = :user_id")
     fun getBalanceByUserId(@Param ("user_id") user_id: Long) : Long
 
     @Modifying
