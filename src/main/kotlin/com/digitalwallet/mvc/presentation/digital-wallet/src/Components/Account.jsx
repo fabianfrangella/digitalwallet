@@ -12,19 +12,21 @@ export default class Account extends Component {
             email: "",
             idCard: "",
             cvu: "",
-            balance: ""
+            balance: "",
+            userId: ""
         }
     }
 
     componentDidMount() {
-        Axios.get(`http://localhost:8080/account/24`)
+        Axios.get(`http://localhost:8080/account/${this.props.location.state.userId}`)
         .then((response) => {
             this.setState({
                 username: response.data.username,
                 email: response.data.email,
                 idCard: response.data.idCard,
                 cvu: response.data.cvu,
-                balance: response.data.balance
+                balance: response.data.balance,
+                userId: this.props.location.state.userId
             })
         })
     }
@@ -32,7 +34,7 @@ export default class Account extends Component {
     render() {
         return (
             <div>
-                <Navigation/>
+                <Navigation id={this.state.userId}/>
                 <header className="App-header">
                     <div className="container col-8">
                         <div className="row justify-content-center">

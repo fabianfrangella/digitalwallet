@@ -9,7 +9,7 @@ export default class Transaction extends Component {
         super(props);
         this.state = {
             transactions: [],
-            records: false
+            records: false,
         };
 
     }
@@ -18,25 +18,30 @@ export default class Transaction extends Component {
         return this.state.transactions.map(e => <tr>
             <td>{e.date.substring(0, 10)}</td>
             <td>{e.date.substring(11, 19)}</td>
+            <td className={`${e.accountFrom == 4 ? 'text-danger' : 'text-success'}`}>
+                {e.accountFrom == 4 ? "Cash Out" : "Cash In"}</td>
             <td> {Math.abs(e.amount)} </td>
         </tr>)
     }
 
-    componentDidMount = () => {
-        Axios.get(`http://localhost:8080/transaction/transaction-list?accountId=4`)
-            .then(response => {
-                this.setState({
-                    transactions: response.data.reverse(),
-                    records: response.data.length > 0
-                })
-            })
+    componentDidMount() {
 
+        Axios.get(`http://localhost:8080/account?userId=${this.props.location.state.userId}`)
+            .then(response => {
+                Axios.get(`http://localhost:8080/transaction/transaction-list?accountId=${response.data}`)
+                    .then(response => {
+                        this.setState({
+                            transactions: response.data.reverse(),
+                            records: response.data.length > 0
+                        })
+                    })
+            })
     }
 
     render() {
         return (
             <div className="App">
-                <Navigation/>
+                <Navigation id={this.props.location.state.userId}/>
                 <header className="App-header">
                     <div className="container">
                         <div className="row justify-content-center">
@@ -56,6 +61,7 @@ export default class Transaction extends Component {
                                 <tr>
                                     <th scope="col">Date</th>
                                     <th scope="col">Time</th>
+                                    <th scope="col">Type</th>
                                     <th scope="col">Amount</th>
                                 </tr>
                                 </thead>

@@ -13,9 +13,7 @@ class TransactionService {
 
 	@Autowired
 	private lateinit var transactionRepository: TransactionRepository
-	@Autowired
-	private lateinit var accountRepository: AccountRepository
-	
+
 	fun transfer(transactionDTO: TransactionDTO){
 		var transaction = Transaction()
 		transaction.accountFrom = transactionDTO.accountFrom

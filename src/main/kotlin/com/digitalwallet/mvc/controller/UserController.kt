@@ -38,4 +38,10 @@ class UserController {
     fun getUserAccount(@PathVariable userId: String): UserDataDTO {
        return userService.getUserData(userId.toLong())
     }
+
+    @GetMapping(path=["/account"])
+    @ResponseBody
+    fun getUserAccountId(@RequestParam userId: Long): Long {
+        return userService.getUserAccountId(userId)
+    }
 }

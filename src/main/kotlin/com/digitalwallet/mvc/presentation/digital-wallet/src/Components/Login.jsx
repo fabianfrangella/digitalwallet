@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
 import { Button, Form, Alert } from "react-bootstrap";
 import '../dist/css/Login.css';
 import Footer from './Footer'
 import logo from '../dist/img/DigitalWalletLogo.png';
-
 /**
  * @author Fabian Frangella
  * Component for login
@@ -39,18 +38,8 @@ class Login extends Component {
         axios.post(`http://localhost:8080/login`, {
             email: this.state.email,
             password: this.state.password,
-        }).then((response) => {
-            this.props.history.push('/home')
-        }).catch((error) => {
-            if (this.state.email !== '' && this.state.password !== '') {
-                this.setState({
-                    alert: {
-                        show: true,
-                        variant: "danger",
-                        message: error.response.data.message
-                    }
-                })
-            }
+        }).then(response => {
+            this.props.history.push('/home', {userId: response.data})
         })
     }
 

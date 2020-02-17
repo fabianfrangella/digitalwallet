@@ -50,20 +50,24 @@ export default class Transfer extends Component {
 
     makeTransfer(event) {
         event.preventDefault()
+        Axios.get(`http://localhost:8080/account?userId=${this.props.location.state.userId}`)
+            .then(response => {
+                this.setState({accountFrom: response.data})
+            })
         Axios.post(`http://localhost:8080/transaction/transfer`, {
-            accountFrom: 4,
+            accountFrom: this.state.accountFrom,
             accountTo: this.state.accountTo,
             amount: this.state.amount
         }).then((response) => {
-                this.setState({
-                    setShowModal: false,
-                    alert: {
-                        show: true,
-                        variant: "success",
-                        message: "Transaction Successful",
-                    }
-                })
-            }).catch((error) => {
+            this.setState({
+                setShowModal: false,
+                alert: {
+                    show: true,
+                    variant: "success",
+                    message: "Transaction Successful",
+                }
+            })
+        }).catch((error) => {
             this.setState({
                 setShowModal: false,
                 alert: {
@@ -97,7 +101,7 @@ export default class Transfer extends Component {
                         </Modal.Footer>
                     </Modal>
                 </>
-                <Navigation/>
+                <Navigation id={this.props.location.state.userId}/>
                 <div className="App-header">
                     <div className="container col-8">
                         <div className="row justify-content-center">

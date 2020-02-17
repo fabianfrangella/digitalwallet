@@ -9,8 +9,8 @@ import com.digitalwallet.persistence.entity.User
 @Repository
 interface UserRepository : JpaRepository<User, Long> {
 
-    @Query("SELECT u.username FROM User u where u.email = :email AND u.password = :password")
-    fun validateUser(@Param("email") username: String, @Param("password") password: String): String
+    @Query("SELECT u.user_id FROM User u where u.email = :email AND u.password = :password")
+    fun validateUser(@Param("email") username: String, @Param("password") password: String): Long
 
     @Query("SELECT max(cvu) FROM User")
     fun getLastCVU() : Long
