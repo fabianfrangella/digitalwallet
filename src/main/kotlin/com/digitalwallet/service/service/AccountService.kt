@@ -12,7 +12,7 @@ class AccountService {
 	private lateinit var accountRepository: AccountRepository
 	
 	fun updateBalance(transactionDTO: TransactionDTO){
-		accountRepository.updateBalance(transactionDTO.accountTo,transactionDTO.amount)
+		accountRepository.updateBalance(transactionDTO.cvuTo,transactionDTO.amount)
 
 		accountRepository.updateBalance(transactionDTO.accountFrom, transactionDTO.amount?.times(-1))
 	} 

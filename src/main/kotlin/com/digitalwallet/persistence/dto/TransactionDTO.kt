@@ -4,7 +4,8 @@ import java.util.*
 
 class TransactionDTO {
 	var accountFrom: Long? = null
-	var accountTo: Long? = null
+	var cvuTo: Long? = null
 	var amount: Long? = null
 	var date: Date? = Date()
+	var description: String? = ""
 }

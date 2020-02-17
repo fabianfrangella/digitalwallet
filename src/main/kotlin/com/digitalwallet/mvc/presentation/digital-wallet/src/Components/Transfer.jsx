@@ -10,6 +10,7 @@ export default class Transfer extends Component {
         this.state = {
             accountTo: '',
             amount: '',
+            description: '',
             setShowModal: false,
             alert: {
                 show: false,
@@ -53,8 +54,9 @@ export default class Transfer extends Component {
             .then(response => {
                 Axios.post(`http://localhost:8080/transaction/transfer`, {
                     accountFrom: response.data,
-                    accountTo: this.state.accountTo,
-                    amount: this.state.amount
+                    cvuTo: this.state.accountTo,
+                    amount: this.state.amount,
+                    description: this.state.description
                 }).then((response) => {
                     this.setState({
                         setShowModal: false,
@@ -131,6 +133,17 @@ export default class Transfer extends Component {
                                        value={this.state.amount}
                                        onChange={event => this.handleChange(event.target.value, "amount")}>
                                 </input>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-md-4">
+                                <label> Description </label>
+                                <textarea
+                                       className='form-control'
+                                       placeholder="Enter a description"
+                                       value={this.state.description}
+                                       onChange={event => this.handleChange(event.target.value, "description")}>
+                                </textarea>
                             </div>
                         </div>
                         <br></br>

@@ -19,4 +19,5 @@ interface AccountRepository : JpaRepository<Account, Long>{
 
     @Query("SELECT a.account_id FROM Account a WHERE a.user_id = :user_id")
     fun getUserAccountId(@Param("user_id") user_id: Long): Long
+
 }

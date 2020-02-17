@@ -28,7 +28,7 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Login}/>
-                    <PrivateRoute exact path="/register" component={Register}/>
+                    <Route exact path="/register" component={Register}/>
                     <PrivateRoute exact path="/logout" component={Logout}/>
                     <PrivateRoute exact path="/home" component={Account}/>
                     <PrivateRoute exact path="/transfer" component={Transfer}/>

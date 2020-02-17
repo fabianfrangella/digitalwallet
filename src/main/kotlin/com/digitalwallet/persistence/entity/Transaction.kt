@@ -12,6 +12,7 @@ class Transaction(@Id @GeneratedValue val transaction_id: Long? = null,
 				  var amount: Long? = null,
 				  var accountFrom: Long? = null,
 				  var accountTo: Long? = null,
-				  var date: Date? = null
+				  var date: Date? = null,
+				  var description: String? = null
 )
 
