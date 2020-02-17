@@ -26,3 +26,6 @@ CREATE TABLE transaction(
         CONSTRAINT account_to_FK FOREIGN KEY (account_to) REFERENCES accounts(account_id),
         CONSTRAINT account_from_FK FOREIGN KEY (account_from) REFERENCES accounts(account_id)
     );
+
+    ALTER TABLE table_name ADD CONSTRAINT constraint_name constraint_definition;
+	ALTER TABLE transaction ADD CONSTRAINT CHK_amount CHECK (amount > 0);

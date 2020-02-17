@@ -6,6 +6,7 @@ import com.digitalwallet.persistence.dto.UserDataDTO
 import com.digitalwallet.persistence.dto.UserRegisterDTO
 import com.digitalwallet.persistence.entity.Account
 import com.digitalwallet.persistence.entity.User
+import com.digitalwallet.service.exception.UserException
 import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.UserRepository
 import org.springframework.stereotype.Service
@@ -23,8 +24,13 @@ class UserService {
 
     fun login(loginUser: LoginUserDTO) : Long {
 		var encodedPassword = Base64.getEncoder().encodeToString(loginUser.password.toByteArray())
-        return userRepository.validateUser(loginUser.email, encodedPassword)
-
+        var userId: Long?
+        try {
+            userId = userRepository.validateUser(loginUser.email, encodedPassword)
+        } catch (ex: Exception) {
+            throw UserException("Wrong email or password!")
+        }
+        return userId
     }
 
     fun register(userDTO: UserRegisterDTO) : User{

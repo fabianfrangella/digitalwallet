@@ -58,21 +58,23 @@ export default class Transfer extends Component {
                     amount: this.state.amount,
                     description: this.state.description
                 }).then((response) => {
+                    console.log(response.data)
                     this.setState({
                         setShowModal: false,
                         alert: {
                             show: true,
                             variant: "success",
-                            message: "Transaction Successful",
+                            message: response.data
                         }
                     })
                 }).catch((error) => {
+                    console.log(response)
                     this.setState({
                         setShowModal: false,
                         alert: {
                             show: true,
                             variant: "danger",
-                            message: "Error during transaction, please try again"
+                            message: error.response.data.message
                         }
                     })
                 })
@@ -113,16 +115,17 @@ export default class Transfer extends Component {
                         <hr style={{color: '#0275d8', backgroundColor: '#0275d8', height: 1}}/>
                         <div className="row justify-content-center">
                             <div className="col-md-4">
-                                <label> Account Number </label>
+                                <label> CVU Number </label>
                                 <input type="number"
                                        required
                                        className='form-control'
-                                       placeholder="Account Number"
+                                       placeholder="CVU Number"
                                        value={this.state.accountTo}
                                        onChange={event => this.handleChange(event.target.value, "accountTo")}>
                                 </input>
                             </div>
                         </div>
+                        <p></p>
                         <div className="row justify-content-center">
                             <div className="col-md-4">
                                 <label> Amount </label>
@@ -135,6 +138,7 @@ export default class Transfer extends Component {
                                 </input>
                             </div>
                         </div>
+                        <p></p>
                         <div className="row justify-content-center">
                             <div className="col-md-4">
                                 <label> Description </label>

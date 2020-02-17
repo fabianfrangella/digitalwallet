@@ -40,6 +40,14 @@ class Login extends Component {
             password: this.state.password,
         }).then(response => {
             this.props.history.push('/home', {userId: response.data})
+        }).catch(error => {
+            this.setState({
+                alert: {
+                    show: true,
+                    variant: "danger",
+                    message: error.response.data.message
+                }
+            })
         })
     }
 

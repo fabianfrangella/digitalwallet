@@ -3,9 +3,12 @@ package com.digitalwallet.mvc.controller
 
 import com.digitalwallet.persistence.dto.TransactionDTO
 import com.digitalwallet.persistence.entity.Transaction
+import com.digitalwallet.service.exception.TransferException
 import com.digitalwallet.service.service.AccountService
 import com.digitalwallet.service.service.TransactionService
+import org.hibernate.TransactionException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
@@ -27,8 +30,13 @@ class TransactionController {
             produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
 	@Transactional
+	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	fun transfer(@RequestBody transactionDTO: TransactionDTO) {
-		transactionService.transfer(transactionDTO)
+		try {
+			transactionService.transfer(transactionDTO)
+		} catch(ex: TransferException) {
+			throw ex
+		}
 		accountService.updateBalance(transactionDTO)
 	}
 
