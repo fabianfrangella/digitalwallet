@@ -2,6 +2,7 @@ package com.digitalwallet.service.service
 
 import com.digitalwallet.persistence.dto.TransactionDTO
 import com.digitalwallet.persistence.entity.Transaction
+import com.digitalwallet.persistence.entity.User
 import com.digitalwallet.service.exception.NotEnoughMoneyException
 import com.digitalwallet.service.exception.TransferException
 import com.digitalwallet.service.exception.TransferNegativeAmountException
@@ -25,8 +26,8 @@ class TransactionService {
     private lateinit var accountRepository: AccountRepository
 
     private fun getAccountToTransfer(transactionDTO: TransactionDTO): Long {
-        var userId = userRepository.getUserByCvu(transactionDTO.cvuTo!!)
-        return accountRepository.getUserAccountId(userId)
+        var userId: User = userRepository.findUserByCvu(transactionDTO.cvuTo!!)
+        return userId.account!!.account_id!!
     }
 
     fun transfer(transactionDTO: TransactionDTO) {

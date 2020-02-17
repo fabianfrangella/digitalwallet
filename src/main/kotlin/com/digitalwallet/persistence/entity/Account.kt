@@ -6,6 +6,9 @@ import javax.persistence.*
 @Table(name="account")
 data class Account(@Id @GeneratedValue val account_id: Long? = null,
                    var balance: Long? = null,
-                   var user_id: Long? = null,
+                   @OneToOne
+                   @JoinColumn(name = "user_id")
+                   var user_id: User? = null,
+                   @Column
                    var isBlocked: Boolean? = null)
 

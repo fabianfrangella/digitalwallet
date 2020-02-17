@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import javax.transaction.Transactional
 
 @Controller
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -54,8 +55,12 @@ class UserController {
         return userService.getUserAccountId(userId)
     }
 
-    @GetMapping(path = ["/edit-user"])
+    @PostMapping(path = ["/edit-user"],
+            consumes = [MediaType.APPLICATION_JSON_VALUE],
+            produces = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @ResponseBody
+    @Transactional
     fun editUser(@RequestBody editUser: EditUserDTO){
         userService.editUser(editUser)
     }

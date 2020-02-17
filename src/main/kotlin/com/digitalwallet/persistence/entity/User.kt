@@ -1,16 +1,20 @@
 package com.digitalwallet.persistence.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
-@Table(name="app_user")
+@Table(name = "app_user")
 class User(
         @Id @GeneratedValue var user_id: Long? = null,
+        @OneToOne(mappedBy = "user_id")
+        var account: Account? = null,
+        @Column(name = "username")
         var username: String? = null,
+        @Column(name = "email")
         var email: String? = null,
+        @Column(name = "cvu")
         var cvu: Long? = null,
+        @Column(name = "idCard")
         var idCard: Long? = null,
+        @Column(name = "password")
         var password: String? = null)

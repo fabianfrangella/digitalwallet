@@ -40,7 +40,7 @@ class UserService {
         userRepository.save(user)
         newAccount.balance = 200;
         newAccount.isBlocked = false;
-        newAccount.user_id = user.user_id;
+        newAccount.user_id = user;
         accountRepository.save(newAccount)
         return user
     }
@@ -68,7 +68,7 @@ class UserService {
             result.user_id = userFound.get().user_id
             result.idCard = userFound.get().idCard!!
             result.cvu = userFound.get().cvu!!
-            result.balance = id?.let {accountRepository.getBalanceByUserId(it)}
+            result.balance = userFound.get().account!!.balance!!
         } catch (e: Exception) {
             throw e
         }
@@ -76,7 +76,8 @@ class UserService {
     }
 
     fun getUserAccountId(userId: Long) : Long {
-        return accountRepository.getUserAccountId(userId)
+        var user = User(user_id = userId)
+        return accountRepository.getUserAccountId(user)
     }
 
     fun editUser(user: EditUserDTO) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Footer from './Footer'
 import Navigation from './Navigation'
+import {Alert} from 'react-bootstrap';
 import Axios from 'axios';
 
 
@@ -13,7 +14,12 @@ export default class Account extends Component {
             idCard: "",
             cvu: "",
             balance: "",
-            userId: ""
+            userId: "",
+            alert: {
+                show: false,
+                variant: "danger",
+                message: ""
+            }
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,7 +41,13 @@ export default class Account extends Component {
             username: this.state.username,
             email: this.state.email
         }).then(r => {
-            console.log(r)
+            this.setState({
+                alert: {
+                    show: true,
+                    variant: "success",
+                    message: "Profile modified successfully"
+                }
+            })
         }).catch(error => {
             console.log(error)
         })
@@ -119,6 +131,14 @@ export default class Account extends Component {
                                            disabled={true}
                                            value={this.state.balance}>
                                     </input>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-xs-12">
+                                    <br/>
+                                    <Alert variant={this.state.alert.variant} show={this.state.alert.show}>
+                                        {this.state.alert.message}
+                                    </Alert>
                                 </div>
                             </div>
                             <button type="submit"
