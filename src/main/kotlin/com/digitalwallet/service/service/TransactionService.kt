@@ -20,6 +20,7 @@ class TransactionService {
 		transaction.accountFrom = transactionDTO.accountFrom
 		transaction.accountTo = transactionDTO.accountTo
 		transaction.amount = transactionDTO.amount
+		transaction.date = transactionDTO.date
 		transactionRepository.save(transaction)
 	}
 }

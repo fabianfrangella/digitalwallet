@@ -22,6 +22,23 @@ export default class Transfer extends Component {
         this.makeTransfer = this.makeTransfer.bind(this);
     }
 
+    handleOpen = (ev) => {
+        ev.preventDefault();
+        this.setState({
+            setShowModal: true,
+            alert: {
+                show: false
+            }
+        })
+    }
+
+
+    handleClose = () => {
+        this.setState({
+            setShowModal: false
+        })
+    }
+
     /**
      * function used to bind the values of inputs to the component state
      * @param {*} value
@@ -31,19 +48,19 @@ export default class Transfer extends Component {
         this.setState(prevState => ({...prevState, [prop]: value}));
     }
 
-    makeTransfer() {
+    makeTransfer(event) {
+        event.preventDefault()
         Axios.post(`http://localhost:8080/transaction/transfer`, {
-            accountFrom: 7,
+            accountFrom: 4,
             accountTo: this.state.accountTo,
             amount: this.state.amount
-        })
-            .then((response) => {
+        }).then((response) => {
                 this.setState({
                     setShowModal: false,
                     alert: {
                         show: true,
                         variant: "success",
-                        message: response.data,
+                        message: "Transaction Successful",
                     }
                 })
             }).catch((error) => {
@@ -52,7 +69,7 @@ export default class Transfer extends Component {
                 alert: {
                     show: true,
                     variant: "danger",
-                    message: error.response.data.message
+                    message: "Error during transaction, please try again"
                 }
             })
         })
@@ -67,14 +84,14 @@ export default class Transfer extends Component {
                             <Modal.Title>Are you sure?</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            Are you sure you want to cash in {this.state.amount} USD
-                            to your account? <b>This decition cannot be undone.</b>
+                            Are you sure you want to transfer {this.state.amount} USD
+                            to your {this.state.accountTo}? <b>This decision cannot be undone.</b>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={(ev) => this.handleCashIn(ev)}>
+                            <Button variant="primary" onClick={(ev) => this.makeTransfer(ev)}>
                                 Yes, transfer!
                             </Button>
                         </Modal.Footer>
@@ -113,22 +130,24 @@ export default class Transfer extends Component {
                                 </input>
                             </div>
                         </div>
+                        <br></br>
+                        <div className="row justify-content-center">
+                            <div className="col-xs-12">
+                                <Alert variant={this.state.alert.variant} show={this.state.alert.show}>
+                                    {this.state.alert.message}
+                                </Alert>
+                            </div>
+                        </div>
                         <div className="row justify-content-center">
                             <div className="col-md-3">
                                 <br></br>
                                 <button type="submit"
-                                        className="btn btn-primary">
+                                        className="btn btn-primary"
+                                        onClick={event => this.handleOpen(event)}>
                                     Make Transfer!
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-xs-12">
-                        <Alert variant={this.state.alert.variant} show={this.state.alert.show}>
-                            {this.state.alert.message}
-                        </Alert>
                     </div>
                 </div>
                 <Footer/>

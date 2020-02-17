@@ -1,5 +1,6 @@
 package com.digitalwallet.persistence.entity
 
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -10,6 +11,7 @@ import javax.persistence.Table
 class Transaction(@Id @GeneratedValue val transaction_id: Long? = null,
 				  var amount: Long? = null,
 				  var accountFrom: Long? = null,
-				  var accountTo: Long? = null
+				  var accountTo: Long? = null,
+				  var date: Date? = null
 )
 
