@@ -21,8 +21,9 @@ class UserService {
     @Autowired
     private lateinit var accountRepository: AccountRepository;
 
-    fun login(loginUser: LoginUserDTO) : String{
-        return if (!userRepository.validateUser(loginUser.email,loginUser.password).isNullOrEmpty()) {
+    fun login(loginUser: LoginUserDTO) : String {
+		var encodedPassword = Base64.getEncoder().encodeToString(loginUser.password.toByteArray())
+        return if (!userRepository.validateUser(loginUser.email, encodedPassword).isNullOrEmpty()) {
             "login successful"
         } else {
             "Email or Password is wrong"
@@ -48,7 +49,7 @@ class UserService {
         user.username = userDTO.username
         user.email = userDTO.email
         user.idCard = userDTO.idCard
-        user.password = userDTO.password
+        user.password = Base64.getEncoder().encodeToString(userDTO.password.toByteArray())
         user.cvu = userRepository.getLastCVU() + 1
         return user;
     }

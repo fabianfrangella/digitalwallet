@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 @EntityScan(basePackages = ["com.digitalwallet" ])
 @EnableJpaRepositories(basePackages = ["com.digitalwallet"])
 @SpringBootApplication(scanBasePackages = ["com.digitalwallet"])
-class DigitalwalletApplication
+open class DigitalwalletApplication
 
 fun main(args: Array<String>) {
 	runApplication<DigitalwalletApplication>(*args)

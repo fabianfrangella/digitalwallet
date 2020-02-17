@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import com.digitalwallet.persistence.entity.Transaction
 
-
-interface TransactionRepository {
+@Repository
+interface TransactionRepository : JpaRepository<Transaction,Long> {
 }
