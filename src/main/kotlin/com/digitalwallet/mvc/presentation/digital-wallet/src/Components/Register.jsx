@@ -147,7 +147,6 @@ export default class Register extends Component {
                             <InputGroup>
                                 <Form.Control
                                     required
-                                    type="text"
                                     value={this.state.password}
                                     onChange={event => this.handleChange(event.target.value, 'password')}
                                     type="password"
