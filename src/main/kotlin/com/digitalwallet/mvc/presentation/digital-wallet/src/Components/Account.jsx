@@ -15,6 +15,30 @@ export default class Account extends Component {
             balance: "",
             userId: ""
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    /**
+     * function used to bind the values of inputs to the component state
+     * @param {*} value
+     * @param {prop} prop
+     */
+    handleChange(value, prop) {
+        this.setState(prevState => ({ ...prevState, [prop]: value }));
+    }
+
+    handleSubmit(ev) {
+        ev.preventDefault();
+        Axios.post(`http://localhost:8080/edit-user`, {
+            userId: this.props.location.state.userId,
+            username: this.state.username,
+            email: this.state.email
+        }).then(r => {
+            console.log(r)
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     componentDidMount() {
@@ -49,8 +73,9 @@ export default class Account extends Component {
                                     <label>Username</label>
                                     <input type="text"
                                            className='form-control'
-                                           placeholder= "Enter your First Name"
+                                           placeholder= "Enter your Username"
                                            value={this.state.username}
+                                           onChange={event => this.handleChange(event.target.value, 'username')}
                                             >
                                     </input>
                                     <div className="invalid-feedback">
@@ -73,6 +98,7 @@ export default class Account extends Component {
                                     <input type="text"
                                            className='form-control'
                                            placeholder= "Enter your E-Mail"
+                                           onChange={event => this.handleChange(event.target.value, 'email')}
                                            value={this.state.email}></input>
                                     <div className="invalid-feedback">
                                         Please enter a valid email address.
@@ -96,7 +122,8 @@ export default class Account extends Component {
                                 </div>
                             </div>
                             <button type="submit"
-                                    className="btn btn-primary">Change
+                                    className="btn btn-primary"
+                                    onClick={event => this.handleSubmit(event)}>Change
                                     <i className="far fa-paper-plane"></i>
                             </button>
                         <br/>

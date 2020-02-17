@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import com.digitalwallet.persistence.entity.User
+import org.springframework.data.jpa.repository.Modifying
 
 @Repository
 interface UserRepository : JpaRepository<User, Long> {
@@ -17,5 +18,11 @@ interface UserRepository : JpaRepository<User, Long> {
 
     @Query("SELECT max(cvu) FROM User")
     fun getLastCVU() : Long
+
+    @Modifying
+    @Query("UPDATE User u SET u.username = :username, u.email = :email " +
+            "WHERE u.user_id = :user_id")
+    fun editUser(@Param("email") email: String, @Param ("username") username: String, @Param("user_id") user_id: Long)
+
 
 }

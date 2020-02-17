@@ -1,5 +1,6 @@
 package com.digitalwallet.mvc.controller
 
+import com.digitalwallet.persistence.dto.EditUserDTO
 import com.digitalwallet.persistence.dto.LoginUserDTO
 import com.digitalwallet.persistence.dto.UserDataDTO
 import com.digitalwallet.persistence.dto.UserRegisterDTO
@@ -51,5 +52,11 @@ class UserController {
     @ResponseBody
     fun getUserAccountId(@RequestParam userId: Long): Long {
         return userService.getUserAccountId(userId)
+    }
+
+    @GetMapping(path = ["/edit-user"])
+    @ResponseBody
+    fun editUser(@RequestBody editUser: EditUserDTO){
+        userService.editUser(editUser)
     }
 }

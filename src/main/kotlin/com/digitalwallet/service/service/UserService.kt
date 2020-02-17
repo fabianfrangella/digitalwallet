@@ -1,5 +1,6 @@
 package com.digitalwallet.service.service
 
+import com.digitalwallet.persistence.dto.EditUserDTO
 import org.springframework.beans.factory.annotation.Autowired
 import com.digitalwallet.persistence.dto.LoginUserDTO
 import com.digitalwallet.persistence.dto.UserDataDTO
@@ -76,5 +77,9 @@ class UserService {
 
     fun getUserAccountId(userId: Long) : Long {
         return accountRepository.getUserAccountId(userId)
+    }
+
+    fun editUser(user: EditUserDTO) {
+        userRepository.editUser(user.email,user.username,user.userId)
     }
 }
