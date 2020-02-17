@@ -4,12 +4,15 @@ import com.digitalwallet.persistence.dto.TransactionDTO
 import com.digitalwallet.persistence.entity.Transaction
 import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.TransactionRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class TransactionService {
-	
+
+	@Autowired
 	private lateinit var transactionRepository: TransactionRepository
+	@Autowired
 	private lateinit var accountRepository: AccountRepository
 	
 	fun transfer(transactionDTO: TransactionDTO){

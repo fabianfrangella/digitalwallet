@@ -35,5 +35,6 @@ class TransactionController {
 	@Transactional
 	fun transfer(@RequestBody transactionDTO: TransactionDTO) {
 		transactionService.transfer(transactionDTO)
+		accountService.updateBalance(transactionDTO)
 	}
 }
