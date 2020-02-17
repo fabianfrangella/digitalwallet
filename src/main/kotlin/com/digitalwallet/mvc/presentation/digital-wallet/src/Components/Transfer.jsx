@@ -64,7 +64,7 @@ export default class Transfer extends Component {
                         alert: {
                             show: true,
                             variant: "success",
-                            message: response.data
+                            message: response.data.message
                         }
                     })
                 }).catch((error) => {

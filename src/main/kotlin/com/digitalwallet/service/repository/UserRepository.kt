@@ -17,4 +17,5 @@ interface UserRepository : JpaRepository<User, Long> {
 
     @Query("SELECT max(cvu) FROM User")
     fun getLastCVU() : Long
+
 }

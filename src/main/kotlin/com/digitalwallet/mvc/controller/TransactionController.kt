@@ -30,7 +30,7 @@ class TransactionController {
             produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
 	@Transactional
-	@ResponseStatus(value = HttpStatus.ACCEPTED)
+	@ResponseStatus(value = HttpStatus.ACCEPTED, reason = "Transaction successful!")
 	fun transfer(@RequestBody transactionDTO: TransactionDTO) {
 		try {
 			transactionService.transfer(transactionDTO)
