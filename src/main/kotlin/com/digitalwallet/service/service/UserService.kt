@@ -10,6 +10,7 @@ import com.digitalwallet.persistence.entity.User
 import com.digitalwallet.service.exception.UserException
 import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.UserRepository
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -54,7 +55,11 @@ class UserService {
         user.email = userDTO.email
         user.idCard = userDTO.idCard
         user.password = Base64.getEncoder().encodeToString(userDTO.password.toByteArray())
-        user.cvu = userRepository.getLastCVU() + 1
+        if (userRepository.findAll().isNullOrEmpty()){
+            user.cvu = 111111
+        } else {
+            user.cvu = userRepository.getLastCVU() + 1
+        }
         return user;
     }
 
@@ -81,6 +86,9 @@ class UserService {
     }
 
     fun editUser(user: EditUserDTO) {
-        userRepository.editUser(user.email,user.username,user.userId)
+        var editedUser = userRepository.findByIdOrNull(user.userId)
+        editedUser!!.email = user.email
+        editedUser!!.username = user.username
+        userRepository.save(editedUser)
     }
 }

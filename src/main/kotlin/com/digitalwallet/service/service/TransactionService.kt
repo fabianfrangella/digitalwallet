@@ -28,11 +28,9 @@ class TransactionService {
     @Autowired
     private lateinit var accountRepository: AccountRepository
 
-    private fun getAccountToTransfer(transactionDTO: TransactionDTO): Account {
-        var userId: User = userRepository.findUserByCvu(transactionDTO.cvuTo!!)
-        return userId.account!!
-    }
-
+    /**
+     * function to make a transfer between to accounts
+     */
     fun transfer(transactionDTO: TransactionDTO) {
         try {
             var transaction = buildTransaction(transactionDTO)
@@ -49,6 +47,9 @@ class TransactionService {
         }
     }
 
+    /**
+     * function to get the transactions of a given account
+     */
     fun getTransactions(accountId: Long): List<TransactionDTO> {
         var account: Optional<Account> = accountRepository.findById(accountId)
         var cashInTransactions: List<TransactionDTO> = getCashInTransactions(account).map {
@@ -99,6 +100,12 @@ class TransactionService {
 
         return transaction
     }
+
+    private fun getAccountToTransfer(transactionDTO: TransactionDTO): Account {
+        var userId: User = userRepository.findUserByCvu(transactionDTO.cvuTo!!)
+        return userId.account!!
+    }
+
 
     private fun isValidAmount(transactionDTO: TransactionDTO): Boolean {
         return accountRepository.getBalance(transactionDTO.accountFrom) - transactionDTO.amount!! >= 0
