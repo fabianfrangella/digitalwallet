@@ -18,8 +18,8 @@ export default class Transaction extends Component {
         return this.state.transactions.map(e => <tr>
             <td>{e.date.substring(0, 10)}</td>
             <td>{e.date.substring(11, 19)}</td>
-            <td className={`${e.accountFrom === this.state.account ? 'text-danger' : 'text-success'}`}>
-                {e.accountFrom === this.state.account ? "Cash Out" : "Cash In"}</td>
+            <td className={`${!e.isCashIn ?  'text-danger' : 'text-success'}`}>
+                {!e.isCashIn ? "Cash Out" : "Cash In"}</td>
             <td>{e.description}</td>
             <td> {Math.abs(e.amount)} </td>
         </tr>)
@@ -33,7 +33,9 @@ export default class Transaction extends Component {
                 Axios.get(`http://localhost:8080/transaction/transaction-list?accountId=${response.data}`)
                     .then(response => {
                         this.setState({
-                            transactions: response.data.reverse(),
+                            transactions: response.data.sort(function(a,b){
+                                return new Date(b.date) - new Date(a.date);
+                            }),
                             records: response.data.length > 0
                         })
                     })

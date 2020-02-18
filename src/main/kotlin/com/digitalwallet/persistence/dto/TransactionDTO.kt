@@ -8,4 +8,5 @@ class TransactionDTO {
 	var amount: Long? = null
 	var date: Date? = Date()
 	var description: String? = ""
+	var isCashIn: Boolean? = null
 }

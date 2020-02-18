@@ -10,5 +10,10 @@ data class Account(@Id @GeneratedValue val account_id: Long? = null,
                    @JoinColumn(name = "user_id")
                    var user_id: User? = null,
                    @Column
-                   var isBlocked: Boolean? = null)
+                   var isBlocked: Boolean? = null,
+                   @OneToMany(mappedBy = "accountFrom")
+                   var cashOutTransactions: List<Transaction>? = null,
+                   @OneToMany(mappedBy = "accountTo")
+                   var cashInTransactions: List<Transaction>? = null
+                   )
 

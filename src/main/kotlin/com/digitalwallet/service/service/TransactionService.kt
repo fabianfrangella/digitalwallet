@@ -1,6 +1,7 @@
 package com.digitalwallet.service.service
 
 import com.digitalwallet.persistence.dto.TransactionDTO
+import com.digitalwallet.persistence.entity.Account
 import com.digitalwallet.persistence.entity.Transaction
 import com.digitalwallet.persistence.entity.User
 import com.digitalwallet.service.exception.NotEnoughMoneyException
@@ -11,7 +12,9 @@ import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.TransactionRepository
 import com.digitalwallet.service.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class TransactionService {
@@ -25,9 +28,9 @@ class TransactionService {
     @Autowired
     private lateinit var accountRepository: AccountRepository
 
-    private fun getAccountToTransfer(transactionDTO: TransactionDTO): Long {
+    private fun getAccountToTransfer(transactionDTO: TransactionDTO): Account {
         var userId: User = userRepository.findUserByCvu(transactionDTO.cvuTo!!)
-        return userId.account!!.account_id!!
+        return userId.account!!
     }
 
     fun transfer(transactionDTO: TransactionDTO) {
@@ -46,8 +49,35 @@ class TransactionService {
         }
     }
 
-    fun getTransactions(accountId: Long): List<Transaction> {
-        return transactionRepository.findTransactions(accountId)
+    fun getTransactions(accountId: Long): List<TransactionDTO> {
+        var account: Optional<Account> = accountRepository.findById(accountId)
+        var cashInTransactions: List<TransactionDTO> = getCashInTransactions(account).map {
+            transaction -> buildTransactionDTO(transaction,true)
+        }
+        var cashOutTransactions: List<TransactionDTO> = getCashOutTransactions(account).map {
+            transaction -> buildTransactionDTO(transaction,false)
+        }
+        var transactions: MutableList<TransactionDTO> = mutableListOf()
+        transactions.addAll(cashInTransactions)
+        transactions.addAll(cashOutTransactions)
+        return transactions
+    }
+
+    private fun buildTransactionDTO(transaction: Transaction, isCashIn: Boolean): TransactionDTO {
+        var dto = TransactionDTO()
+        dto.amount = transaction.amount
+        dto.date = transaction.date
+        dto.isCashIn = isCashIn
+        dto.description = transaction.description
+        return dto
+    }
+
+    private fun getCashInTransactions(account: Optional<Account>) : List<Transaction> {
+        return transactionRepository.findByAccountTo(account) as MutableList<Transaction>
+    }
+
+    private fun getCashOutTransactions(account: Optional<Account>) : List<Transaction> {
+        return transactionRepository.findByAccountFrom(account) as MutableList<Transaction>
     }
 
     private fun buildTransaction(transactionDTO: TransactionDTO): Transaction {
@@ -56,12 +86,13 @@ class TransactionService {
             throw NotEnoughMoneyException("You don't have enough money!")
         }
         transaction.accountTo = getAccountToTransfer(transactionDTO)
-        if (transactionDTO.accountFrom == transaction.accountTo) {
+        if (transactionDTO.accountFrom == transaction.accountTo!!.account_id) {
             throw TransferToYourselfException("You can't transfer to yourself!")
         } else if (transactionDTO.amount!! <= 0) {
             throw TransferNegativeAmountException("You can't transfer a negative amount!")
         }
-        transaction.accountFrom = transactionDTO.accountFrom
+        var accountFrom = accountRepository.findByIdOrNull(transactionDTO.accountFrom)
+        transaction.accountFrom = accountFrom
         transaction.amount = transactionDTO.amount
         transaction.date = transactionDTO.date
         transaction.description = transactionDTO.description

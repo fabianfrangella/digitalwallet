@@ -2,6 +2,7 @@ package com.digitalwallet.mvc.controller
 
 
 import com.digitalwallet.persistence.dto.TransactionDTO
+import com.digitalwallet.persistence.entity.Account
 import com.digitalwallet.persistence.entity.Transaction
 import com.digitalwallet.service.exception.TransferException
 import com.digitalwallet.service.service.AccountService
@@ -42,7 +43,7 @@ class TransactionController {
 
 	@GetMapping(path = ["/transaction-list"])
 	@ResponseBody
-	fun getTransactions(@RequestParam accountId: Long): List<Transaction> {
+	fun getTransactions(@RequestParam accountId: Long): List<TransactionDTO> {
 		return transactionService.getTransactions(accountId)
 	}
 }

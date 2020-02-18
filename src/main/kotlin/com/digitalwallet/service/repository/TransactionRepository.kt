@@ -1,5 +1,6 @@
 package com.digitalwallet.service.repository
 
+import com.digitalwallet.persistence.entity.Account
 import com.digitalwallet.persistence.entity.Transaction
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -10,6 +11,7 @@ import java.util.*
 @Repository
 interface TransactionRepository : JpaRepository<Transaction,Long> {
 
-    @Query("SELECT t FROM Transaction t WHERE t.accountFrom = :accountId OR t.accountTo = :accountId")
-    fun findTransactions(@Param("accountId") accountId: Long): List<Transaction>
+    fun findByAccountFrom(@Param("accountFrom") accountFrom: Optional<Account>) : List<Transaction>
+
+    fun findByAccountTo(@Param("accountTo") accountTo: Optional<Account>) : List<Transaction>
 }
