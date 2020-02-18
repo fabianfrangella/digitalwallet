@@ -5,7 +5,8 @@ import javax.persistence.*
 @Entity
 @Table(name = "app_user")
 class User(
-        @Id @GeneratedValue var user_id: Long? = null,
+        @Id @GeneratedValue
+        var user_id: Long? = null,
         @OneToOne(mappedBy = "user_id")
         var account: Account? = null,
         @Column(name = "username")
