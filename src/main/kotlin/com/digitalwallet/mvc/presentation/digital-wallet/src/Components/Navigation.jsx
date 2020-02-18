@@ -25,10 +25,10 @@ class Navigation extends Component {
               <Link className="link" to={{pathname: 'transactions', state: {userId: this.props.id}}}>Transactions</Link>
             </Navbar.Brand>
             <Navbar.Brand>
-              <Link className="link" to={{pathname: 'home', state: {userId: this.props.id}}}>Cash In</Link>
+              <Link className="link" to={{pathname: 'transfer', state: {userId: this.props.id}}}>Transfer</Link>
             </Navbar.Brand>
             <Navbar.Brand>
-              <Link className="link" to={{pathname: 'transfer', state: {userId: this.props.id}}}>Transfer</Link>
+              <Link className="link" to={{pathname: 'register'}}>Create new Account</Link>
             </Navbar.Brand>
             </Nav>
             <Nav>

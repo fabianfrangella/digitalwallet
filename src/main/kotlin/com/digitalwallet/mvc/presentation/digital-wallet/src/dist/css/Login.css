@@ -1,24 +1,22 @@
-@media all and (min-width: 460px) {  
-  .Login {
-    padding: 120px 0;
-    text-align: center;
-    background-color: #282c34;
-    color: white;
-    height: 90vh;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-  }
+@media all and (min-width: 460px) {
+    .Login {
+        background-color: #282c34;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
 
-  .Login form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
+    .Login form {
+        margin: 0 auto;
+        max-width: 320px;
+    }
 
-  .Login-logo {
-    height: 10vmin;
-  } 
+    .Login-logo {
+        height: 10vmin;
+    }
 }
 
 
