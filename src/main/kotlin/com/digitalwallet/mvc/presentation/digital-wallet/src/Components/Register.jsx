@@ -99,7 +99,7 @@ export default class Register extends Component {
                 <div className="row justify-content-center">
                     <img className="Register-logo" src={logo} alt="DigitalWallet Logo"></img>
                 </div>
-                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit} className="col-md-12">
                     <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
