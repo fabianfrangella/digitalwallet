@@ -87,10 +87,10 @@ class Login extends Component {
     render() {
         return (
             <div className="Login">
-                <div className="row justify-content-center">
+                <div className="justify-content-center">
                     <img className="Login-logo" src={logo} alt="DigitalWallet Logo"></img>
                 </div>
-                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit} className="col-md-12">
                     <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
