@@ -69,7 +69,7 @@ export default class Account extends Component {
 
     render() {
         return (
-            <div>
+            <div className="App">
                 <Navigation id={this.state.userId}/>
                 <header className="App-header">
                     <div className="container col-8">
@@ -148,8 +148,9 @@ export default class Account extends Component {
                             </button>
                         <br/>
                     </div>
-                    <Footer/>
+                    
                 </header>
+                <Footer/>
             </div>
         )
     }
