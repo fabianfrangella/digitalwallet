@@ -9,6 +9,8 @@ class User(
         var user_id: Long? = null,
         @OneToOne(mappedBy = "user_id")
         var account: Account? = null,
+        @OneToMany(mappedBy = "user_id")
+        var cards: List<DigitalWalletCard>? = null,
         @Column(name = "username")
         var username: String? = null,
         @Column(name = "email")
