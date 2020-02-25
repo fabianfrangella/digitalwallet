@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import Footer from './Footer'
 import Navigation from './Navigation'
-import {Alert} from 'react-bootstrap';
+import {Alert, Modal, Button} from 'react-bootstrap';
 import Axios from 'axios';
 
 export default class Cards extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            cards: []
+            cards: [],
+            setShowModal: false,
+            alert: {
+                show: false,
+                variant: "danger",
+                message: ""
+            }
         }
     }
 
@@ -32,9 +38,55 @@ export default class Cards extends Component {
         })
     }
 
+    createCard = (ev) => {
+        ev.preventDefault()
+        Axios.post(`http://localhost:8080/card/create-card?userId=${this.props.location.state.userId}`)
+        .then((response) => {
+            this.setState({
+                setShowModal: false
+            })
+        this.componentDidMount()
+        })
+    }
+
+    handleOpen = (ev) => {
+        ev.preventDefault();
+        this.setState({
+            setShowModal: true,
+            alert: {
+                show: false
+            }
+        })
+    }
+
+
+    handleClose = () => {
+        this.setState({
+            setShowModal: false
+        })
+    }
+
     render(){
         return(
             <div className="App">
+                <>
+                    <Modal show={this.state.setShowModal} onHide={this.handleClose} animation={false}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Are you sure?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                           Are you sure you want to create a new Card?
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={(ev) => this.createCard(ev)}>
+                                Yes!
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </>
                 <Navigation id={this.props.location.state.userId}/>
                 <header className="App-header">
                     <div className="container">
@@ -64,7 +116,17 @@ export default class Cards extends Component {
                                 {this.renderCards()}
                                 </tbody>
                             </table>
-
+                            <div className="row justify-content-center">
+                            <div className="col-md-3">
+                                <br></br>
+                                <button type="submit"
+                                        className="btn btn-primary"
+                                        onClick={ev=>this.handleOpen(ev)}
+                                        >
+                                            Create a New Card!
+                                </button>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </header>
