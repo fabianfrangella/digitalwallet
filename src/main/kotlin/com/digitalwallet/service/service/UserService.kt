@@ -24,6 +24,9 @@ class UserService {
     @Autowired
     private lateinit var accountRepository: AccountRepository;
 
+    @Autowired
+    private lateinit var digitalWalletCardService: DigitalWalletCardService;
+
     fun login(loginUser: LoginUserDTO) : Long {
 		var encodedPassword = Base64.getEncoder().encodeToString(loginUser.password.toByteArray())
         var userId: Long?
@@ -43,6 +46,7 @@ class UserService {
         newAccount.isBlocked = false;
         newAccount.user_id = user;
         accountRepository.save(newAccount)
+        digitalWalletCardService.createCard(user!!.user_id!!)
         return user
     }
 
