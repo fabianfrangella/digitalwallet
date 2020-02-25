@@ -3,6 +3,7 @@
     width: 422px;
     height: 264px;
     display: flex;
-    margin-right: 28px;
+    margin-right: 15px;
+    margin-left: 12px;
     justify-content: left;
 }

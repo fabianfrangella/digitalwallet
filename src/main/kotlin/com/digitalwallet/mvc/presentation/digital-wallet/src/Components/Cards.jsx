@@ -100,6 +100,7 @@ export default class Cards extends Component {
                         
                         <div className="row justify-content-center">
                             <div className="col-md-6">
+                                <br/>
                                 <h3 className="text-primary"> My Cards </h3>
                             </div>
                         </div>
@@ -114,46 +115,15 @@ export default class Cards extends Component {
                                     {this.renderCards()}
                                 </div>
                             </div>
-
-{/*                             <div className="container col-md-10">
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <Card/>
-                                        <br></br>
-                                        <Card/>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <Card/>
-                                        <br></br>
-                                        <Card/>
-                                    </div>
-                                </div>
-                            </div> */}
-
-{/*                             <table hidden={!this.state.records} className="table-dark col">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Card Number</th>
-                                    <th scope="col">Card Limit</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Security Number</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {this.renderCards()}
-                                </tbody>
-                            </table> */}
                             <div className="row justify-content-center">
-                            <div className="col-md-3">
-                                <br></br>
-                                <button type="submit"
-                                        className="btn btn-primary"
-                                        onClick={ev=>this.handleOpen(ev)}
-                                        >
-                                            Create a New Card!
-                                </button>
-                            </div>
+                                <div className="col-md-3">
+                                    <button type="submit"
+                                            className="btn btn-primary"
+                                            onClick={ev=>this.handleOpen(ev)}
+                                            >
+                                                Create a New Card!
+                                    </button>
+                                </div>
                         </div>
                         </div>
                     </div>

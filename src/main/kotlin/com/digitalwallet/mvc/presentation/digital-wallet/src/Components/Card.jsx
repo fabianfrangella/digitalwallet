@@ -5,11 +5,12 @@ export default class Cards extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            cardNumber: '',
+            cardNumber: 0,
             firstname: '',
             lastname: '',
             cardId:'',
-            dueDate: '10/25'
+            dueDate: '10/25',
+            cardNumberWSpaces:''
             }
     }
 
@@ -20,29 +21,19 @@ export default class Cards extends Component {
             lastname: this.props.lastname,
             cardId: this.props.cardId
         })
+        let modifiedCardNumber = this.props.cardNumber.toString();
+        while (modifiedCardNumber.length > 0){
+            this.setState({
+                cardNumberWSpaces: this.state.cardNumberWSpaces + " " + modifiedCardNumber.substring(0,4)
+            })
+            modifiedCardNumber = modifiedCardNumber.substring(4);// Trim String
+        }
     }
 
     render() {
         return(
             <div className="Card">
-                <div className="row">
-                    <div className="col-md-6">
-                        <br/><br/>
-                        <h6>Digital Wallet Card</h6>
-                        <br/><br/><br/>
-                        <div className="col-md-6">
-                            <h4>{this.state.cardNumber}</h4>
-                        </div>                      
-                        <div className="container">     
-                            <label>Due Date: {this.state.dueDate}</label>
-                        </div>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="row">
-                            <h6>{this.state.firstname} {this.state.lastname}</h6>
-                        </div>
-                    </div>
-                </div> 
+                <label>{this.state.cardNumberWSpaces}</label>
              </div>
         )
     }
