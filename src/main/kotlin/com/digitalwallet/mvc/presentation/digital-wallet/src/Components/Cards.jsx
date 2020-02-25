@@ -10,6 +10,7 @@ export default class Cards extends Component {
         this.state = {
             cards: [],
             setShowModal: false,
+            records: false,
             alert: {
                 show: false,
                 variant: "danger",
@@ -99,7 +100,7 @@ export default class Cards extends Component {
                         <div className="container">
                             <div hidden={this.state.records}>
                                 <i className="fas fa-exclamation-triangle fa-10x"></i>
-                                <h1 className="display-4">No records</h1>
+                                <h1 className="display-4">No Cards</h1>
                             </div>
 
                             <table hidden={!this.state.records} className="table-dark col">
