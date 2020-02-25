@@ -9,7 +9,8 @@ class DigitalWalletCardDTO(
         var securityNumber: Long? = null,
         var amountLimit: Long? = null,
         var firstname: String? = null,
-        var lastname: String? = null
+        var lastname: String? = null,
+        var dueDate: String? = null
         ) {
 
     constructor(card: DigitalWalletCard) : this() {
@@ -20,5 +21,6 @@ class DigitalWalletCardDTO(
         amountLimit = card.amountLimit
         firstname = card!!.user_id!!.firstname
         lastname = card!!.user_id!!.lastname
+        dueDate = card.dueDate!!.monthValue.toString() + "/" + card.dueDate!!.year.toString()
     }
 }

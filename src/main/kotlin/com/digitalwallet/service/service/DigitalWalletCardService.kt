@@ -7,6 +7,7 @@ import com.digitalwallet.service.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class DigitalWalletCardService {
@@ -27,6 +28,7 @@ class DigitalWalletCardService {
             newCard.cardNumber = digitalWalletCardRepository.findLastCardNumber() + 1
         }
         newCard.securityNumber = (100..999).random().toLong()
+        newCard.dueDate = LocalDate.of(LocalDate.now().year + 5,LocalDate.now().month,LocalDate.now().dayOfMonth)
         digitalWalletCardRepository.save(newCard)
     }
 

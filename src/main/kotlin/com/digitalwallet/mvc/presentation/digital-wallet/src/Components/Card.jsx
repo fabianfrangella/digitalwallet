@@ -9,7 +9,7 @@ export default class Cards extends Component {
             firstname: '',
             lastname: '',
             cardId:'',
-            dueDate: '10/25',
+            dueDate: '',
             cardNumberWSpaces:''
             }
     }
@@ -19,7 +19,8 @@ export default class Cards extends Component {
             cardNumber: this.props.cardNumber,
             firstname: this.props.firstname,
             lastname: this.props.lastname,
-            cardId: this.props.cardId
+            cardId: this.props.cardId,
+            dueDate: this.props.dueDate
         })
         let cardNumber = this.props.cardNumber.toString();
         while (cardNumber.length > 0){

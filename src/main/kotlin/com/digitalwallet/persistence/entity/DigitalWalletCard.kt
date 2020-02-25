@@ -1,6 +1,8 @@
 package com.digitalwallet.persistence.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import java.time.LocalDate
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -16,5 +18,7 @@ class DigitalWalletCard (@Id @GeneratedValue
                          @Column(name = "security_number")
                          var securityNumber: Long? = null,
                          @Column(name = "amount_limit")
-                         var amountLimit: Long? = null
-)
+                         var amountLimit: Long? = null,
+                         @Column(name = "due_date")
+                         var dueDate: LocalDate? = LocalDate.now()
+                         )

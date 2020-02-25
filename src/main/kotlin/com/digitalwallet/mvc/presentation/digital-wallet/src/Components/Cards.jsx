@@ -28,6 +28,7 @@ export default class Cards extends Component {
                     firstname={card.firstname}
                     lastname={card.lastname}
                     cardId={card.card_id}
+                    dueDate={card.dueDate}
                 />
                 <br/>
             </div>
