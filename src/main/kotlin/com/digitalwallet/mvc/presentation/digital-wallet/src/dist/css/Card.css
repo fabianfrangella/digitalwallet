@@ -1,0 +1,8 @@
+.Card {
+    background-image: url("card-template.png");
+    width: 422px;
+    height: 264px;
+    display: flex;
+    margin-right: 28px;
+    justify-content: left;
+}

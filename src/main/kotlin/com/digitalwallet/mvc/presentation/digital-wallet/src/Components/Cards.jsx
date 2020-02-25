@@ -3,6 +3,7 @@ import Footer from './Footer'
 import Navigation from './Navigation'
 import {Alert, Modal, Button} from 'react-bootstrap';
 import Axios from 'axios';
+import Card from './Card';
 
 export default class Cards extends Component {
     constructor(props) {
@@ -20,13 +21,17 @@ export default class Cards extends Component {
     }
 
     renderCards = () => {
-        return this.state.cards.map(card => <tr>
-            <td>{card.cardNumber}</td>
-            <td>{card.amountLimit}</td>
-            <td>{card.firstname}</td>
-            <td>{card.lastname}</td>
-            <td>{card.securityNumber}</td>
-        </tr>)
+        return this.state.cards.map(card =>
+            <div>
+                <Card 
+                    cardNumber={card.cardNumber}
+                    firstname={card.firstname}
+                    lastname={card.lastname}
+                    cardId={card.card_id}
+                />
+                <br/>
+            </div>
+        )
     }
 
     componentDidMount() {
@@ -36,6 +41,7 @@ export default class Cards extends Component {
                 cards: response.data,
                 records: response.data.length > 0
             })
+            this.renderCards()
         })
     }
 
@@ -91,6 +97,7 @@ export default class Cards extends Component {
                 <Navigation id={this.props.location.state.userId}/>
                 <header className="App-header">
                     <div className="container">
+                        
                         <div className="row justify-content-center">
                             <div className="col-md-6">
                                 <h3 className="text-primary"> My Cards </h3>
@@ -102,8 +109,28 @@ export default class Cards extends Component {
                                 <i className="fas fa-exclamation-triangle fa-10x"></i>
                                 <h1 className="display-4">No Cards</h1>
                             </div>
+                            <div className="container col-md-10">
+                                <div className="row">
+                                    {this.renderCards()}
+                                </div>
+                            </div>
 
-                            <table hidden={!this.state.records} className="table-dark col">
+{/*                             <div className="container col-md-10">
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <Card/>
+                                        <br></br>
+                                        <Card/>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <Card/>
+                                        <br></br>
+                                        <Card/>
+                                    </div>
+                                </div>
+                            </div> */}
+
+{/*                             <table hidden={!this.state.records} className="table-dark col">
                                 <thead>
                                 <tr>
                                     <th scope="col">Card Number</th>
@@ -116,7 +143,7 @@ export default class Cards extends Component {
                                 <tbody>
                                 {this.renderCards()}
                                 </tbody>
-                            </table>
+                            </table> */}
                             <div className="row justify-content-center">
                             <div className="col-md-3">
                                 <br></br>

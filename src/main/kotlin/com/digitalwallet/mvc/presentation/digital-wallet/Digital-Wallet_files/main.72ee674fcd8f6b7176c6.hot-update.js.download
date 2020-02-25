@@ -1,0 +1,139 @@
+webpackHotUpdate("main",{
+
+/***/ "./src/Components/Card.jsx":
+/*!*********************************!*\
+  !*** ./src/Components/Card.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Cards; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer */ "./src/Components/Footer.jsx");
+/* harmony import */ var _Navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navigation */ "./src/Components/Navigation.jsx");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _dist_css_Card_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dist/css/Card.css */ "./src/dist/css/Card.css");
+/* harmony import */ var _dist_css_Card_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_dist_css_Card_css__WEBPACK_IMPORTED_MODULE_5__);
+var _jsxFileName = "C:\\Users\\fabian.a.frangella\\Desktop\\DigitalWallet\\digitalwallet\\src\\main\\kotlin\\com\\digitalwallet\\mvc\\presentation\\digital-wallet\\src\\Components\\Card.jsx";
+
+
+
+
+
+
+class Cards extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cardNumber: '',
+      firstname: '',
+      lastname: '',
+      cardId: '',
+      dueDate: '10/25'
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      cardNumber: this.props.cardNumber,
+      firstname: this.props.firstname,
+      lastname: this.props.lastname,
+      cardId: this.props.cardId
+    });
+  }
+
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Card",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 31
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row justify-content-left margin-left",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 32
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 33
+      },
+      __self: this
+    }, "Digital Wallet Card")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 36
+      },
+      __self: this
+    }, this.state.cardNumber), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38
+      },
+      __self: this
+    }, this.state.firstname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40
+      },
+      __self: this
+    }, this.state.lastname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 41
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
+      },
+      __self: this
+    }, "Due Date: ", this.state.dueDate), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 43
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44
+      },
+      __self: this
+    }, this.state.cardId));
+  }
+
+}
+
+/***/ })
+
+})
+//# sourceMappingURL=main.72ee674fcd8f6b7176c6.hot-update.js.map
