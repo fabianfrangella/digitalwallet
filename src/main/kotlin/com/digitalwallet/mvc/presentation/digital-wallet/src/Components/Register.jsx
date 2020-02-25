@@ -17,6 +17,8 @@ export default class Register extends Component {
             email: '',
             password: '',
             idCard: '',
+            firstname: '',
+            lastname: '',
             validated: false,
             alert : {
                 show: false,
@@ -50,7 +52,9 @@ export default class Register extends Component {
             email: this.state.email,
             username: this.state.username,
             idCard: this.state.idCard,
-            password: this.state.password
+            password: this.state.password,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname
         }).then((response) => {
             if (response.status === 201) {
                 this.props.history.push('/');
@@ -121,6 +125,32 @@ export default class Register extends Component {
                             value={this.state.username}
                             onChange={event => this.handleChange(event.target.value, 'username')}
                             placeholder="Enter your username"
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            This is a required field.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="firstname">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control
+                            required
+                            type="text"
+                            value={this.state.firstname}
+                            onChange={event => this.handleChange(event.target.value, 'firstname')}
+                            placeholder="Enter your First Name"
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            This is a required field.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="lastname">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                            required
+                            type="text"
+                            value={this.state.lastname}
+                            onChange={event => this.handleChange(event.target.value, 'lastname')}
+                            placeholder="Enter your Last Name"
                         />
                         <Form.Control.Feedback type="invalid">
                             This is a required field.

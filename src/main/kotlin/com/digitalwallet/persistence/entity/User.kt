@@ -13,6 +13,10 @@ class User(
         var cards: List<DigitalWalletCard>? = null,
         @Column(name = "username")
         var username: String? = null,
+        @Column(name = "firstname")
+        var firstname: String? = null,
+        @Column(name = "lastname")
+        var lastname: String? = null,
         @Column(name = "email")
         var email: String? = null,
         @Column(name = "cvu")

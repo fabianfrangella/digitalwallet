@@ -55,6 +55,8 @@ class UserService {
         user.email = userDTO.email
         user.idCard = userDTO.idCard
         user.password = Base64.getEncoder().encodeToString(userDTO.password.toByteArray())
+        user.firstname = userDTO.firstname
+        user.lastname = userDTO.lastname
         if (userRepository.findAll().isNullOrEmpty()){
             user.cvu = 111111
         } else {

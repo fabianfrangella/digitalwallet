@@ -1,7 +1,6 @@
 package com.digitalwallet.mvc.controller
 
 import com.digitalwallet.persistence.dto.DigitalWalletCardDTO
-import com.digitalwallet.persistence.entity.DigitalWalletCard
 import com.digitalwallet.service.service.DigitalWalletCardService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

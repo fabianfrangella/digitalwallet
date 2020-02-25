@@ -8,8 +8,10 @@ import Logout from './Components/Logout';
 import Account from './Components/Account';
 import Transfer from './Components/Transfer';
 import Transaction from './Components/Transaction';
+import Cards from './Components/Cards';
 import PrivateRoute from './Components/PrivateRoute';
 import './Utils'
+
 /**
  * @author Fabian Frangella
  * Component that contains the app routing
@@ -33,6 +35,7 @@ class App extends Component {
                     <PrivateRoute exact path="/home" component={Account}/>
                     <PrivateRoute exact path="/transfer" component={Transfer}/>
                     <PrivateRoute exact path="/transactions" component={Transaction}/>
+                    <PrivateRoute exact path="/cards" component={Cards}/>
                     <Route path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image';
@@ -26,6 +27,9 @@ class Navigation extends Component {
             </Navbar.Brand>
             <Navbar.Brand>
               <Link className="link" to={{pathname: 'transfer', state: {userId: this.props.id}}}>Transfer</Link>
+            </Navbar.Brand>
+            <Navbar.Brand>
+              <Link className="link" to={{pathname: 'cards', state: {userId: this.props.id}}}>My Cards</Link>
             </Navbar.Brand>
             <Navbar.Brand>
               <Link className="link" to={{pathname: 'register'}}>Create new Account</Link>
