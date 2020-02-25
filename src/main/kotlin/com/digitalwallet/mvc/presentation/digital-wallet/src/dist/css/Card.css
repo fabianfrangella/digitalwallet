@@ -7,3 +7,18 @@
     margin-left: 12px;
     justify-content: left;
 }
+
+.card-number{
+    margin-top: 102px;
+    margin-left: 70px;
+}
+
+.card-due-date{
+    margin-top:186px;
+    margin-left: -285px;
+}
+
+.card-name {
+    margin-top:155px;
+    margin-left: -100px;
+}

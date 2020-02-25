@@ -21,19 +21,25 @@ export default class Cards extends Component {
             lastname: this.props.lastname,
             cardId: this.props.cardId
         })
-        let modifiedCardNumber = this.props.cardNumber.toString();
-        while (modifiedCardNumber.length > 0){
-            this.setState({
-                cardNumberWSpaces: this.state.cardNumberWSpaces + " " + modifiedCardNumber.substring(0,4)
-            })
-            modifiedCardNumber = modifiedCardNumber.substring(4);// Trim String
+        let cardNumber = this.props.cardNumber.toString();
+        while (cardNumber.length > 0){
+            this.state.cardNumberWSpaces = this.state.cardNumberWSpaces + " " + cardNumber.substring(0,4)
+            cardNumber = cardNumber.substring(4);// Trim String
         }
     }
 
     render() {
         return(
             <div className="Card">
-                <label>{this.state.cardNumberWSpaces}</label>
+                <div className="col-md-9 card-number">
+                    <h4>{this.state.cardNumberWSpaces}</h4>
+                </div>
+                <div className="card-due-date">
+                    <label>{this.state.dueDate}</label>
+                </div>
+                <div className="card-name">
+                    <h5>{this.state.firstname} {this.state.lastname}</h5>
+                </div>
              </div>
         )
     }
