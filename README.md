@@ -1,4 +1,4 @@
-# digitalwallet
+# Digital Wallet
 
 ## Login
 ![LoginPage](images/DigitalWalletLogin.png)
