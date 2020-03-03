@@ -3,7 +3,7 @@
 ## Login
 ![LoginPage](images/DigitalWalletLogin.png)
 
-## Digital Wallet Registration Page
+## Registration Page
 ![DigitalWalletCardsPage](images/DigitalWalletRegisterPage.png)
 
 ## Home Page
@@ -15,5 +15,5 @@
 ## Transactions Page
 ![TransactionsPage](images/DigitalWalletTransactions.png)
 
-## Digital Wallet Cards Page
+## My Cards Page
 ![DigitalWalletCardsPage](images/DigitalWalletMyCardsPage.png)
