@@ -31,11 +31,11 @@ class Navigation extends Component {
             <Navbar.Brand>
               <Link className="link" to={{pathname: 'cards', state: {userId: this.props.id}}}>My Cards</Link>
             </Navbar.Brand>
+            </Nav>
+            <Nav>
             <Navbar.Brand>
               <Link className="link" to={{pathname: 'register'}}>Create new Account</Link>
             </Navbar.Brand>
-            </Nav>
-            <Nav>
             <Navbar.Brand>
             <Link className="link" to= "logout">Logout</Link>
             </Navbar.Brand>
