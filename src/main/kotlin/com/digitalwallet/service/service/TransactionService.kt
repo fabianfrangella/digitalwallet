@@ -49,7 +49,6 @@ class TransactionService {
                 is NotEnoughMoneyException-> {
                     log.info(ex.message)
                     throw ex
-
                 }
                 else -> {
                     val message = "The CVU ${transactionDTO.cvuTo} does not exist"
