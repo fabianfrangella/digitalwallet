@@ -23,4 +23,6 @@ class DigitalWalletCardDTO(
         lastname = card!!.user_id!!.lastname
         dueDate = card.dueDate!!.monthValue.toString() + "/" + card.dueDate!!.year.toString()
     }
+
+    override fun toString() : String = "card_id: $card_id user_id: $user_id cardNumber: $cardNumber"
 }
