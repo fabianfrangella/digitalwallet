@@ -10,6 +10,8 @@ import com.digitalwallet.persistence.entity.User
 import com.digitalwallet.service.exception.UserException
 import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.UserRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
@@ -17,6 +19,10 @@ import java.util.*
 
 @Service
 class UserService {
+
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(UserService::class.java)
+    }
 
     @Autowired
     private lateinit var userRepository: UserRepository;
@@ -27,12 +33,15 @@ class UserService {
     @Autowired
     private lateinit var digitalWalletCardService: DigitalWalletCardService;
 
+
     fun login(loginUser: LoginUserDTO) : Long {
 		var encodedPassword = Base64.getEncoder().encodeToString(loginUser.password.toByteArray())
         var userId: Long?
         try {
+            log.info("Login user ${loginUser.email}")
             userId = userRepository.validateUser(loginUser.email, encodedPassword)
         } catch (ex: Exception) {
+            log.info(ex.message)
             throw UserException("Wrong email or password!")
         }
         return userId

@@ -11,6 +11,8 @@ import com.digitalwallet.service.exception.TransferToYourselfException
 import com.digitalwallet.service.repository.AccountRepository
 import com.digitalwallet.service.repository.TransactionRepository
 import com.digitalwallet.service.repository.UserRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -19,6 +21,9 @@ import java.util.*
 @Service
 class TransactionService {
 
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(TransactionService::class.java)
+    }
     @Autowired
     private lateinit var transactionRepository: TransactionRepository
 
@@ -33,16 +38,22 @@ class TransactionService {
      */
     fun transfer(transactionDTO: TransactionDTO) {
         try {
+            log.info("Starting new transfer from: ${transactionDTO.accountFrom} to ${transactionDTO.cvuTo}")
             var transaction = buildTransaction(transactionDTO)
             transactionRepository.save(transaction)
+            log.info("transaction successful")
         } catch (ex: Exception) {
             when (ex) {
                 is TransferToYourselfException,
                 is TransferNegativeAmountException,
                 is NotEnoughMoneyException-> {
                     throw ex
+                    log.info(ex.message)
                 }
-                else -> throw TransferException("The CVU ${transactionDTO.cvuTo} does not exist")
+                else -> {
+                    throw TransferException("The CVU ${transactionDTO.cvuTo} does not exist")
+                    log.info(ex.message)
+                }
             }
         }
     }
@@ -51,6 +62,7 @@ class TransactionService {
      * function to get the transactions of a given account
      */
     fun getTransactions(accountId: Long): List<TransactionDTO> {
+        log.info("Getting account ${accountId} transactions")
         var account: Optional<Account> = accountRepository.findById(accountId)
         var cashInTransactions: List<TransactionDTO> = getCashInTransactions(account).map {
             transaction -> buildTransactionDTO(transaction,true)
@@ -70,6 +82,8 @@ class TransactionService {
         dto.date = transaction.date
         dto.isCashIn = isCashIn
         dto.description = transaction.description
+        dto.accountFrom = transaction.accountFrom!!.account_id
+        dto.cvuTo = transaction.accountTo!!.user_id!!.cvu
         return dto
     }
 
