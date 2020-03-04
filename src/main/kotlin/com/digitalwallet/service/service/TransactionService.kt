@@ -41,18 +41,20 @@ class TransactionService {
             log.info("Starting new transfer from: ${transactionDTO.accountFrom} to ${transactionDTO.cvuTo}")
             var transaction = buildTransaction(transactionDTO)
             transactionRepository.save(transaction)
-            log.info("transaction successful")
+            log.info("Transaction ${transaction.transaction_id} successful")
         } catch (ex: Exception) {
             when (ex) {
                 is TransferToYourselfException,
                 is TransferNegativeAmountException,
                 is NotEnoughMoneyException-> {
-                    throw ex
                     log.info(ex.message)
+                    throw ex
+
                 }
                 else -> {
-                    throw TransferException("The CVU ${transactionDTO.cvuTo} does not exist")
-                    log.info(ex.message)
+                    val message = "The CVU ${transactionDTO.cvuTo} does not exist"
+                    log.info(message)
+                    throw TransferException(message)
                 }
             }
         }
@@ -62,7 +64,7 @@ class TransactionService {
      * function to get the transactions of a given account
      */
     fun getTransactions(accountId: Long): List<TransactionDTO> {
-        log.info("Getting account ${accountId} transactions")
+        log.info("Getting transactions from account ${accountId}")
         var account: Optional<Account> = accountRepository.findById(accountId)
         var cashInTransactions: List<TransactionDTO> = getCashInTransactions(account).map {
             transaction -> buildTransactionDTO(transaction,true)
@@ -73,6 +75,7 @@ class TransactionService {
         var transactions: MutableList<TransactionDTO> = mutableListOf()
         transactions.addAll(cashInTransactions)
         transactions.addAll(cashOutTransactions)
+        log.info(transactions.toString())
         return transactions
     }
 
