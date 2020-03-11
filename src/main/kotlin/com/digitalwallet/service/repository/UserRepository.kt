@@ -17,11 +17,4 @@ interface UserRepository : JpaRepository<User, Long> {
 
     @Query("SELECT max(cvu) FROM User")
     fun getLastCVU() : Long
-
-    @Modifying
-    @Query("UPDATE User u SET u.username = :username, u.email = :email " +
-            "WHERE u.user_id = :user_id")
-    fun editUser(@Param("email") email: String, @Param ("username") username: String, @Param("user_id") user_id: Long)
-
-
 }
