@@ -66,27 +66,16 @@ class TransactionService {
         log.info("Getting transactions from account ${accountId}")
         var account: Optional<Account> = accountRepository.findById(accountId)
         var cashInTransactions: List<TransactionDTO> = getCashInTransactions(account).map {
-            transaction -> buildTransactionDTO(transaction,true)
+            transaction -> TransactionDTO(transaction,true)
         }
         var cashOutTransactions: List<TransactionDTO> = getCashOutTransactions(account).map {
-            transaction -> buildTransactionDTO(transaction,false)
+            transaction -> TransactionDTO(transaction,false)
         }
         var transactions: MutableList<TransactionDTO> = mutableListOf()
         transactions.addAll(cashInTransactions)
         transactions.addAll(cashOutTransactions)
         log.info(transactions.toString())
         return transactions
-    }
-
-    private fun buildTransactionDTO(transaction: Transaction, isCashIn: Boolean): TransactionDTO {
-        var dto = TransactionDTO()
-        dto.amount = transaction.amount
-        dto.date = transaction.date
-        dto.isCashIn = isCashIn
-        dto.description = transaction.description
-        dto.accountFrom = transaction.accountFrom!!.account_id
-        dto.cvuTo = transaction.accountTo!!.user_id!!.cvu
-        return dto
     }
 
     private fun getCashInTransactions(account: Optional<Account>) : List<Transaction> {

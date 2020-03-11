@@ -48,17 +48,20 @@ class UserService {
     }
 
     fun register(userDTO: UserRegisterDTO) : User{
-        var user = buildUser(userDTO)
-        var newAccount = Account()
-        userRepository.save(user)
-        newAccount.balance = 200;
-        newAccount.isBlocked = false;
-        newAccount.user_id = user;
+        val user = buildUser(userDTO)
+        val newAccount = buildAccount(user)
         accountRepository.save(newAccount)
         digitalWalletCardService.createCard(user!!.user_id!!)
         return user
     }
 
+    private fun buildAccount(user: User): Account {
+        val account = Account()
+        account.balance = 200
+        account.isBlocked = false
+        account.user_id = user
+        return account
+    }
     /**
      * builds a user from a userDTO
      */
